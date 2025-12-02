@@ -229,3 +229,76 @@ HAVING COUNT(*) > 0;
 </code></pre>
 
 
+<h2>SQL Subquery Practice Questions</h2>
+
+<h3>1. List all courses offered by departments with a budget over $500,000.</h3>
+<p><strong>Logic:</strong> Identify department IDs with a budget greater than $500,000, and then list the courses belonging to those departments.</p>
+<pre><code>SELECT Course_Name
+FROM Courses
+WHERE Department_ID IN (
+    SELECT Department_ID
+    FROM Departments
+    WHERE Budget > 500000
+);
+</code></pre>
+
+<h3>2. Find the students with a CGPA higher than the average CGPA of all students.</h3>
+<p><strong>Logic:</strong> Calculate the average CGPA of all students and select those whose individual CGPA is higher.</p>
+<pre><code>SELECT Student_Name, CGPA
+FROM Students
+WHERE CGPA > (SELECT AVG(CGPA) FROM Students);
+</code></pre>
+
+<h3>3. Find the teacher(s) with the highest salary.</h3>
+<p><strong>Logic:</strong> Find the maximum salary among all teachers, and select the teacher(s) who match that salary.</p>
+<pre><code>SELECT Teacher_Name, Salary
+FROM Teachers
+WHERE Salary = (SELECT MAX(Salary) FROM Teachers);
+</code></pre>
+
+<h3>4. List all departments with more than the average number of faculty members.</h3>
+<p><strong>Logic:</strong> Calculate the average number of faculty members across all departments and list the departments exceeding that average.</p>
+<pre><code>SELECT Department_Name, Faculty_Count
+FROM Departments
+WHERE Faculty_Count > (SELECT AVG(Faculty_Count) FROM Departments);
+</code></pre>
+
+<h3>5. Find the courses in which students scored a grade of "A".</h3>
+<p><strong>Logic:</strong> Identify the Course_IDs from the enrollments table where the grade is 'A', and then retrieve the names of those courses.</p>
+<pre><code>SELECT Course_Name
+FROM Courses
+WHERE Course_ID IN (
+    SELECT Course_ID
+    FROM Course_Enrollments
+    WHERE Grade = 'A'
+);
+</code></pre>
+
+<h3>6. Find the names of professors earning above the average salary of all teachers.</h3>
+<p><strong>Logic:</strong> Calculate the overall average salary and retrieve the names and salaries of teachers whose salary is greater than the average.</p>
+<pre><code>SELECT Teacher_Name, Salary
+FROM Teachers
+WHERE Salary > (SELECT AVG(Salary) FROM Teachers);
+</code></pre>
+
+<h3>7. List all students not enrolled in any course.</h3>
+<p><strong>Logic:</strong> Select students whose Student_ID is not present in the Course_Enrollments table.</p>
+<pre><code>SELECT Student_Name
+FROM Students
+WHERE Student_ID NOT IN (SELECT Student_ID FROM Course_Enrollments);
+</code></pre>
+
+<h3>8. Find the departments offering more than 2 courses.</h3>
+<p><strong>Logic:</strong> Use a subquery with GROUP BY and HAVING to count courses per department and filter those with a count greater than 2.</p>
+<pre><code>SELECT Department_Name
+FROM Departments
+WHERE Department_ID IN (
+    SELECT Department_ID
+    FROM Courses
+    GROUP BY Department_ID
+    HAVING COUNT(Course_ID) > 2
+);
+</code></pre>
+
+
+
