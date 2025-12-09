@@ -300,5 +300,52 @@ WHERE Department_ID IN (
 );
 </code></pre>
 
+<pre><code class="language-sql">CREATE DATABASE Teachers_Students;
+USE Teachers_Students;
+
+CREATE TABLE Faculty (
+    Faculty_ID VARCHAR(10),
+    Faculty_Name VARCHAR(50),
+    Dean VARCHAR(50),
+    Email VARCHAR(100)
+);
+
+CREATE TABLE Teachers_Portal (
+    Teacher_ID VARCHAR(10),
+    Name VARCHAR(50),
+    Email VARCHAR(100),
+    Faculty_ID VARCHAR(10)
+);
+
+CREATE TABLE Students_Portal (
+    Student_ID VARCHAR(10),
+    Name VARCHAR(50),
+    Address VARCHAR(50),
+    Age INT,
+    CGPA DECIMAL(3,2),
+    Faculty_ID VARCHAR(10)
+);
+
+INSERT INTO Faculty (Faculty_ID, Faculty_Name, Dean, Email) VALUES
+('F301', 'FSIT', 'Mr. Fokhray', 'fsit@diu.edu.bd'),
+('F302', 'FBE', 'Mr. Rokibul', 'fbe@diu.edu.bd'),
+('F303', 'FHLS', 'Mr. Majumder', 'fhls@diu.edu.bd'),
+('F304', 'FE', 'Mr. Shamsul', 'fe@diu.edu.bd'),
+('F305', 'FHSS', 'Ms. Liza', 'fhss@diu.edu.bd');
+
+INSERT INTO Teachers_Portal (Teacher_ID, Name, Email, Faculty_ID) VALUES
+('T201', 'Mr. Sohel', 'sohel@diu.edu.bd', 'F301'),
+('T202', 'Mr. Mehedi', 'mehedi@diu.edu.bd', 'F302'),
+('T203', 'Mr. Israfil', 'israfil@diu.edu.bd', 'F305'),
+('T204', 'Mr. Faruk', 'faruk@diu.edu.bd', 'F304'),
+('T205', 'Ms. Sonia', 'sonia@diu.edu.bd', 'F301');
+
+INSERT INTO Students_Portal (Student_ID, Name, Address, Age, CGPA, Faculty_ID) VALUES
+('S101', 'Shimu', 'Rajshahi', 24, 3.80, 'F301'),
+('S102', 'Rayhan', 'Chittagong', 23, 3.20, 'F305'),
+('S103', 'Samiul', 'Dhaka', 21, 3.95, 'F301'),
+('S104', 'Shehabaul', 'Rajshahi', 22, 3.50, 'F304'),
+('S105', 'Tanzil', 'Khulna', 24, 3.10, 'F302');</code></pre>
+
 
 
